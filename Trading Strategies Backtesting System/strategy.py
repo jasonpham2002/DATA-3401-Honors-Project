@@ -18,7 +18,11 @@ class Strategy:
     def execute_trade(self):
         pass
     def calculate_return(self):
-        pass
+        self.data['asset_returns'] = self.data['Close'].pct_change()
+        self.data['strategy_returns'] = self.data['asset_returns'] * self.data['signal'].shift(1) #calculate the returns for the money you spend invested
+        # 1 is invested, 0 is sitting in cash
+
+
     def generate_signal(self):
         pass
 
@@ -42,7 +46,11 @@ class MACrossover(Strategy):
         # subtraction is -1 (0-1--> higher - lower), pos is buy because price is down
         self.data['position'] = self.data['signal'].diff()
 
-    def calculate_return(self):
 
+class RSIMeanReversion(Strategy):
+    def __init__(self, asset_data):
+        super().__init__(asset_data)
 
-
+    def generate_signal(self):
+        self.data['SMA200'] = self.data['Close'].rolling(window=200).meand()
+        RS = self.data['Close'].pct_change().rolling(window=)
