@@ -18,7 +18,7 @@ class Strategy:
     def execute_trade(self):
         # idea: subtraction is 0 (1-1, 0-0 --> higher - higher, lower - lower), no pos change --> hold
         # subtraction is 1 (1-0 --> higher - lower), pos is buy because price is up
-        # subtraction is -1 (0-1--> higher - lower), pos is buy because price is down
+        # subtraction is -1 (0-1--> higher - lower), pos is sell because price is down
         self.data['position'] = self.data['signal'].diff()
 
     def calculate_return(self):
