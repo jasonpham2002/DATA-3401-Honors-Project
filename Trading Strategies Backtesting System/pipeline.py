@@ -37,3 +37,6 @@ class DataPipeline:
     def fetch_data(self, file_path):
         self.data = pd.read_csv(file_path, index_col=0, parse_dates=True)
         return self.data
+
+    def features_init(self):
+        self.data['5D_Return'] = self.data['Close'].pct_change(period=5)
